@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rss_book/region/feed/feed_page.dart';
+
 import 'package:rss_book/region/generic/molecules/app_footer.dart';
 
 import 'molecules/app_title.dart';
@@ -19,6 +21,16 @@ class _HomeState extends State<Home> {
             // Header.
             AppTitle(),
 
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return FeedPage();
+                    }),
+                  );
+                },
+                child: Text("Tap me")),
             // Spacer.
             // To move the footer to the bottom.
             Spacer(),

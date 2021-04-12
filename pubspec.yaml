@@ -12,6 +12,8 @@ dependencies:
 
   google_fonts:
 
+  multiple_screens:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
