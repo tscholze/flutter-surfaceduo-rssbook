@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multiple_screens/multiple_screens.dart';
+import 'package:rss_book/region/feed/molecules/book_page.dart';
 
 class FeedPage extends StatefulWidget {
   @override
@@ -38,8 +39,12 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-          _isDuoSpanned ? _makeDualScreenContent() : _makeSingleScreenContent(),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
+        child: _isDuoSpanned
+            ? _makeDualScreenContent()
+            : _makeSingleScreenContent(),
+      ),
     );
   }
 
@@ -49,8 +54,9 @@ class _FeedPageState extends State<FeedPage> {
       children: [
         // Left
         Flexible(
+          flex: 1,
           child: Center(
-            child: Text("Left"),
+            child: BookPage(),
           ),
         ),
 
@@ -59,6 +65,7 @@ class _FeedPageState extends State<FeedPage> {
 
         // Right
         Flexible(
+          flex: 1,
           child: Center(
             child: Text("Right"),
           ),

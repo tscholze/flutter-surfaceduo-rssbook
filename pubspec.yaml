@@ -11,8 +11,8 @@ dependencies:
     sdk: flutter
 
   google_fonts:
-
   multiple_screens:
+  dotted_line: 3.0.0
 
 dev_dependencies:
   flutter_test:
