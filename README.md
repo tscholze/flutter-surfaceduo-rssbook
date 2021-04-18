@@ -38,7 +38,7 @@ I'm very new to Flutter, Android and dual screen devices, please do not use this
 
 ### Contributing
 
-This is a one-time-example, there will maybe no further development (maybe platform verison bumps fixes). That means, no contribution is necessary.
+This is a one-time-example, there will maybe no further development (maybe platform verison bumps fixes). But for now it would be awesome if expierenced Flutter developers could help me with some topic.
 
 ### Authors
 
@@ -47,6 +47,8 @@ Just me, [Tobi]([https://tscholze.github.io).
 
 ## Acknowledgments
 
+* [Flutter's Reddit](https://www.reddit.com/r/flutterhelp/) community
+* [Flutter's Discord](https://discord.gg/N7Yshp4) server
 * [Surface Duo SDK Technet Community](https://techcommunity.microsoft.com/t5/surface-duo-sdk/bd-p/SurfaceDuoSDK) for helping beginners, too.
 * [Get Started with Flutter on Surface Duo](https://devblogs.microsoft.com/surface-duo/get-started-with-flutter-on-surface-duo/) Microsoft DevBlog article.
 
