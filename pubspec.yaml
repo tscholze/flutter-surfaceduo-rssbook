@@ -1,0 +1,23 @@
+name: rss_book
+description: Read RSS feeds like it would be a good book
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.07.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  google_fonts:
+  multiple_screens:
+  dotted_line: 3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+  uses-material-design: true
