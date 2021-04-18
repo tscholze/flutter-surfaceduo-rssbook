@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rss_book/region/generic/home.dart';
+import 'package:rss_book/ui/region/generic/home.dart';
 
 void main() {
   runApp(MyApp());

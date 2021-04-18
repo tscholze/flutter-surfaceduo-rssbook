@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rss_book/region/feed/feed_page.dart';
-
-import 'package:rss_book/region/generic/molecules/app_footer.dart';
+import 'package:rss_book/ui/region/feed/feed_page.dart';
+import 'package:rss_book/ui/region/generic/molecules/app_footer.dart';
 
 import 'molecules/app_title.dart';
 

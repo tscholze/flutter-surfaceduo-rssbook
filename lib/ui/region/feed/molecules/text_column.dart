@@ -24,5 +24,5 @@ class TextColumn extends StatelessWidget {
   }
 }
 
-const pageTextStyle =
-    TextStyle(fontSize: 16, color: Colors.black87, letterSpacing: 1.3);
+final pageTextStyle =
+TextStyle(fontSize: 16, color: Colors.black87, letterSpacing: 1.3);
