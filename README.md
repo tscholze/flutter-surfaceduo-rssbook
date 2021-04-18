@@ -1,6 +1,6 @@
 # rss_book
 
-Read RSS feeds like it would be a good book
+> Read your RSS feed like it would be an ebook - A sample Android app that demonstrates the unique features of a Surface Duo.
 
 ### Prerequisites
 
@@ -19,6 +19,10 @@ Read RSS feeds like it would be a good book
 6. [ ] Make app multi feed able
 7. [ ] Check on localization
 8. [ ] Check on publishing to the Play Store
+
+### Caution
+
+I'm very new to Flutter, Android and dual screen devices, please do not use this repository as the only source of truth in regard to Flutter or dual screen development.
 
 ### How it looks
 
