@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:multiple_screens/multiple_screens.dart';
 import 'package:rss_book/region/feed/molecules/book_page.dart';
 
+// https://stackoverflow.com/questions/51640388/flutter-textpainter-vs-paragraph-for-drawing-book-page
 class FeedPage extends StatefulWidget {
   @override
   _FeedPageState createState() => _FeedPageState();
@@ -55,19 +56,23 @@ class _FeedPageState extends State<FeedPage> {
         // Left
         Flexible(
           flex: 1,
-          child: Center(
-            child: BookPage(),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+            child: BookPage(title: "Flutter + Surface Duo is awesome!", pageNumber: 1,),
           ),
         ),
 
         // Hinge spacer
-        SizedBox(width: _hingeSize.toDouble()),
+        SizedBox(width: 40),
 
         // Right
         Flexible(
           flex: 1,
           child: Center(
-            child: Text("Right"),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: BookPage(pageNumber: 2,),
+            ),
           ),
         ),
       ],
