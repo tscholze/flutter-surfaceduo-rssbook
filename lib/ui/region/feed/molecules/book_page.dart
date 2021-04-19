@@ -24,7 +24,9 @@ class BookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container (
+        decoration: new BoxDecoration(color: Colors.red),
+      child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
 
@@ -46,7 +48,7 @@ class BookPage extends StatelessWidget {
         // Footer / Bottom
         _makeBottom()
       ],
-    );
+    ));
   }
 
   // - Private helper -
@@ -84,7 +86,6 @@ class BookPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 4 - 50,
           child: TextColumn(
             text: content,
-            maxLines: title != null ? maxLinesWithTitle : maxLinesOnlyText,
           ),
         ),
 
@@ -98,7 +99,6 @@ class BookPage extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 4 - 50,
           child: TextColumn(
             text: content,
-            maxLines: title != null ? maxLinesWithTitle : maxLinesOnlyText,
           ),
         )
       ],
@@ -108,7 +108,6 @@ class BookPage extends StatelessWidget {
   Widget _makeNonDuoContent() {
     return TextColumn(
       text: content,
-      maxLines: title != null ? maxLinesWithTitle : maxLinesOnlyText,
     );
   }
 
