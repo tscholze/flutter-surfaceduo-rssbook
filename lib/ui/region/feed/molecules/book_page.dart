@@ -2,6 +2,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rss_book/ui/region/feed/molecules/text_column.dart';
+import 'package:rss_book/ui/styles/styles.dart';
 
 class BookPage extends StatelessWidget {
   // - Static properties -
@@ -18,56 +19,50 @@ class BookPage extends StatelessWidget {
 
   // - Init -
 
-  const BookPage({this.title, this.content, this.pageNumber, this.isDuo}) : super();
+  const BookPage({this.title, this.content, this.pageNumber, this.isDuo})
+      : super();
 
   // - Overriders -
 
   @override
   Widget build(BuildContext context) {
-    return Container (
-        decoration: new BoxDecoration(color: Colors.red),
-      child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Textual content
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Optional header.
+              _makeTitleIfRequired(),
 
-        // Textual content
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Optional header.
-            _makeTitleIfRequired(),
+              // Content
+              isDuo ? _makeDuoContent(context) : _makeNonDuoContent()
+            ],
+          ),
 
-            // Content
-            isDuo ? _makeDuoContent(context) : _makeNonDuoContent()
-          ],
-        ),
+          // Spacer to move footer to the bottom
+          Spacer(),
 
-        // Spacer to move footer to the bottom
-        Spacer(),
-
-        // Footer / Bottom
-        _makeBottom()
-      ],
-    ));
+          // Footer / Bottom
+          _makeBottom()
+        ],
+      ),
+    );
   }
 
   // - Private helper -
 
   Widget _makeTitleIfRequired() {
-    //
-    if(title == null)
-      return SizedBox(width: 0, height: 0);
+    // If `title`  is null, do not show a label.
+    if (title == null) return SizedBox(width: 0, height: 0);
 
-    //
+    // Else wise, show a title label with a spacer.
     return Column(
       children: [
         // Title
-        Text(
-          title,
-          textAlign: TextAlign.left,
-          maxLines: 2,
-          style: titleStyle
-        ),
+        Text(title, textAlign: TextAlign.left, maxLines: 2, style: titleStyle),
 
         // Spacer
         SizedBox(
@@ -129,15 +124,11 @@ class BookPage extends StatelessWidget {
         Text(
           "Page $pageNumber",
           style: GoogleFonts.goudyBookletter1911(
-              fontSize: 10,
-              color: Colors.blueGrey,
+            fontSize: 10,
+            color: Colors.blueGrey,
           ),
         )
       ],
     );
   }
 }
-
-
-final titleStyle = GoogleFonts.goudyBookletter1911(textStyle: TextStyle(fontSize: 32, fontWeight: FontWeight.bold));
-final pageTextStyle = TextStyle(fontSize: 16, color: Colors.black87, letterSpacing: 1.3);
