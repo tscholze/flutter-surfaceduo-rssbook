@@ -186,14 +186,17 @@ class _HomeState extends State<Home> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          // Title
           Text(
-            "${item.title.substring(0, 25)}",
-            maxLines: 3,
-            softWrap: true,
+            "${item.title}",
+            maxLines: 1,
+            overflow: TextOverflow.clip,
             style: GoogleFonts.goudyBookletter1911(
               textStyle: TextStyle(fontStyle: FontStyle.italic),
             ),
           ),
+
+          // Line
           Expanded(
             child: Padding(
               padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
@@ -204,6 +207,9 @@ class _HomeState extends State<Home> {
                   dashColor: Colors.blueGrey),
             ),
           ),
+
+          // Something
+          Text("data")
         ],
       ),
     );
