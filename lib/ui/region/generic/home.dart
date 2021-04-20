@@ -1,9 +1,7 @@
+import 'package:dart_rss/dart_rss.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rss_book/ui/region/feed/feed_page.dart';
-import 'package:dart_rss/dart_rss.dart';
-import 'package:rss_book/ui/styles/styles.dart';
 import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
@@ -154,13 +152,16 @@ class _HomeState extends State<Home> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
-          "${feed.data.title} - ${feed.data.description} ${feed.data.description} ",
-          overflow: TextOverflow.clip,
-          style: GoogleFonts.goudyBookletter1911(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            textStyle: TextStyle(fontStyle: FontStyle.italic),
+        Container(
+          width: MediaQuery.of(context).size.width - 70,
+          child: Text(
+            "${feed.data.title} - ${feed.data.description}",
+            overflow: TextOverflow.clip,
+            style: GoogleFonts.goudyBookletter1911(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              textStyle: TextStyle(fontStyle: FontStyle.italic),
+            ),
           ),
         ),
         Expanded(
@@ -178,6 +179,7 @@ class _HomeState extends State<Home> {
       ],
     );
   }
+
   Widget _makeArticleListItem(RssItem item) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 4, 0, 4),
@@ -185,12 +187,12 @@ class _HomeState extends State<Home> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-              "${item.title.substring(0,25)}",
-              maxLines: 3,
-              softWrap: true,
-              style: GoogleFonts.goudyBookletter1911(
-                textStyle: TextStyle(fontStyle: FontStyle.italic),
-              ),
+            "${item.title.substring(0, 25)}",
+            maxLines: 3,
+            softWrap: true,
+            style: GoogleFonts.goudyBookletter1911(
+              textStyle: TextStyle(fontStyle: FontStyle.italic),
+            ),
           ),
           Expanded(
             child: Padding(
