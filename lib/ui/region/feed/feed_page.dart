@@ -1,3 +1,4 @@
+import 'package:dart_rss/dart_rss.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multiple_screens/multiple_screens.dart';
@@ -9,7 +10,7 @@ import 'package:rss_book/ui/region/generic/home.dart';
 class FeedPage extends StatefulWidget {
 
   // - Private properties -
-  FeedItem item;
+  RssItem item;
 
   // - Init -
   FeedPage({ this.item });

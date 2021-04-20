@@ -15,14 +15,17 @@ class _HomeState extends State<Home> {
   // Private properties
 
   List<Feed> _feeds = [
-    Feed("https://www.drwindows.de/news/feed", "Dr. Windows"),
+    Feed("https://www.drwindows.de/news/feed"),
   ];
 
   @override
   void initState() {
+    // Load ech feed.
+    _feeds.forEach((element) {
+      element.load();
+    });
 
-    _feeds.forEach((element) { element.load(); });
-
+    // Call super init.
     super.initState();
   }
 
@@ -31,26 +34,42 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
-        child: Column(
-          children: [
-            // Title.
-            _makeTitle(),
+      body: FutureBuilder(
+        // Initialize FlutterFire:
+        future: _feeds[0].load(),
+        builder: (context, snapshot) {
+          // 1. Handle errors.
+          if (snapshot.hasError) {
+            return _makeErrorText(snapshot.error);
+          }
 
-            // Table of content.
-            // Expands.
-            _makeList(),
+          // 2. Check if futures has been completed.
+          if (snapshot.connectionState == ConnectionState.done) {
+            return _makeBody();
+          }
 
-            // Footer.
-            _makeFooter()
-          ],
-        ),
+          // Otherwise, show loading indicator.
+          return _makeProgressIndicator();
+        },
       ),
     );
   }
 
   // - Helper -
+
+  Widget _makeErrorText(Error error) {
+    return Center(
+      child: Text(error.toString()),
+    );
+  }
+
+  Widget _makeProgressIndicator() {
+    return Center(
+      child: CircularProgressIndicator(
+        valueColor: new AlwaysStoppedAnimation<Color>(Colors.black87),
+      ),
+    );
+  }
 
   Widget _makeTitle() {
     return Column(
@@ -76,6 +95,25 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget _makeBody() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
+      child: Column(
+        children: [
+          // Title.
+          _makeTitle(),
+
+          // Table of content.
+          // Expands.
+          _makeList(),
+
+          // Footer.
+          _makeFooter()
+        ],
+      ),
+    );
+  }
+
   Widget _makeFooter() {
     return Text("Made with Flutter and <3.",
         style: GoogleFonts.goudyBookletter1911(), textAlign: TextAlign.center);
@@ -86,34 +124,69 @@ class _HomeState extends State<Home> {
       child: ListView.builder(
         itemCount: _feeds.length,
         itemBuilder: (context, position) {
-          return _makeListItem(_feeds[position]);
+          return _makeFeedListItem(_feeds[position]);
         },
       ),
     );
   }
 
-  Widget _makeListItem(Feed feed) {
-    return TextButton(
-      style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all(Colors.black87)),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) {
-            return FeedPage(
-              item: null,
-            );
-          }),
-        );
-      },
+  Widget _makeFeedListItem(Feed feed) {
+    List<Widget> articleWidgets = [];
+
+    feed.data.items.forEach((element) {
+      articleWidgets.add(_makeArticleListItem(element));
+    });
+
+    return Column(
+      children: [
+        // Feed title
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              "${feed.data.title} - ${feed.data.description} ",
+              style: GoogleFonts.goudyBookletter1911(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                textStyle: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+                child: DottedLine(
+                    dashLength: 1,
+                    dashGapLength: 3,
+                    lineThickness: 1,
+                    dashColor: Colors.blueGrey),
+              ),
+            ),
+            Text('( ${feed.data.items.length} )',
+                style: GoogleFonts.goudyBookletter1911()),
+          ],
+        ),
+
+        // Feed items
+        Column(
+          children: articleWidgets,
+        )
+      ],
+    );
+  }
+
+  Widget _makeArticleListItem(RssItem item) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 4, 0, 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            feed.name,
-            style: GoogleFonts.goudyBookletter1911(
-              textStyle: TextStyle(fontStyle: FontStyle.italic),
-            ),
+              "${item.title.substring(0,25)}",
+              maxLines: 3,
+              softWrap: true,
+              style: GoogleFonts.goudyBookletter1911(
+                textStyle: TextStyle(fontStyle: FontStyle.italic),
+              ),
           ),
           Expanded(
             child: Padding(
@@ -125,7 +198,6 @@ class _HomeState extends State<Home> {
                   dashColor: Colors.blueGrey),
             ),
           ),
-          Text('( 8 )', style: GoogleFonts.goudyBookletter1911()),
         ],
       ),
     );
@@ -136,27 +208,16 @@ class Feed {
   // - Properties -
 
   final String url;
-  final String name;
-  List<FeedItem> items = [];
+  RssFeed data;
 
   // - Init -
 
-  Feed(this.url, this.name) : super();
+  Feed(this.url) : super();
 
   // - Helper -
 
   Future<void> load() async {
     var rss = await http.read(url);
-    var rssFeed = new RssFeed.parse(rss);
-    rssFeed.items.forEach((item) { print(item.title); });
+    data = new RssFeed.parse(rss);
   }
-}
-
-class FeedItem {
-  final String title;
-  final String url;
-
-  // - Init -
-
-  const FeedItem({this.title, this.url});
 }
