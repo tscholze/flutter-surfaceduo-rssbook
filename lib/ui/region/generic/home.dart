@@ -140,31 +140,7 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         // Feed title
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              "${feed.data.title} - ${feed.data.description} ",
-              style: GoogleFonts.goudyBookletter1911(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                textStyle: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
-                child: DottedLine(
-                    dashLength: 1,
-                    dashGapLength: 3,
-                    lineThickness: 1,
-                    dashColor: Colors.blueGrey),
-              ),
-            ),
-            Text('( ${feed.data.items.length} )',
-                style: GoogleFonts.goudyBookletter1911()),
-          ],
-        ),
+        _makeFeedTitle(feed),
 
         // Feed items
         Column(
@@ -174,6 +150,33 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget _makeFeedTitle(Feed feed) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          "${feed.data.title} - ${feed.data.description} ",
+          style: GoogleFonts.goudyBookletter1911(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            textStyle: TextStyle(fontStyle: FontStyle.italic),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+            child: DottedLine(
+                dashLength: 1,
+                dashGapLength: 3,
+                lineThickness: 1,
+                dashColor: Colors.blueGrey),
+          ),
+        ),
+        Text('( ${feed.data.items.length} )',
+            style: GoogleFonts.goudyBookletter1911()),
+      ],
+    );
+  }
   Widget _makeArticleListItem(RssItem item) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 4, 0, 4),
