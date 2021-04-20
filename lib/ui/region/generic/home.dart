@@ -155,7 +155,8 @@ class _HomeState extends State<Home> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          "${feed.data.title} - ${feed.data.description} ",
+          "${feed.data.title} - ${feed.data.description} ${feed.data.description} ",
+          overflow: TextOverflow.clip,
           style: GoogleFonts.goudyBookletter1911(
             fontSize: 16,
             fontWeight: FontWeight.w600,
