@@ -1,8 +1,11 @@
 import 'package:dart_rss/dart_rss.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+
+import '../feed/feed_page.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -69,24 +72,27 @@ class _HomeState extends State<Home> {
 
   Widget _makeTitle() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Title.
         Text(
           "The Feed's Book",
           style: GoogleFonts.goudyBookletter1911(
-              fontSize: 42, fontWeight: FontWeight.w900),
+              fontSize: 36, fontWeight: FontWeight.w900),
         ),
 
         // Sub title.
         Text(
-          "Read your feeds in a classic manor using your Surface Duo.",
+          "Read your feeds in a classic manor.",
           style: GoogleFonts.goudyBookletter1911(
             textStyle: Theme.of(context).textTheme.subtitle1,
             fontSize: 21,
             fontStyle: FontStyle.italic,
           ),
         ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+          child: _makeDottedLine(),
+        )
       ],
     );
   }
@@ -95,7 +101,8 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height - 50),
+          constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height - 55),
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
@@ -122,12 +129,18 @@ class _HomeState extends State<Home> {
   Widget _makeFooter() {
     return Column(
       children: [
-        _makeDottedLine(),
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text("Made with Flutter and <3.",
-              style: GoogleFonts.goudyBookletter1911(color: Colors.grey),
-              textAlign: TextAlign.center),
+          padding: EdgeInsets.symmetric(vertical: 8),
+          child: _makeDottedLine(),
+        ),
+        RichText(
+          text: new TextSpan(
+            style: GoogleFonts.goudyBookletter1911(color: Colors.grey),
+            children: <TextSpan>[
+              new TextSpan(text: 'Made with Flutter and '),
+              new TextSpan(text: '❤', style: new TextStyle(fontSize: 8)),
+            ],
+          ),
         ),
       ],
     );
@@ -141,10 +154,8 @@ class _HomeState extends State<Home> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Expanded(
-        child: Column(
-          children: items,
-        ),
+      child: Column(
+        children: items,
       ),
     );
   }
@@ -156,16 +167,19 @@ class _HomeState extends State<Home> {
       articleWidgets.add(_makeArticleListItem(element));
     });
 
-    return Column(
-      children: [
-        // Feed title
-        _makeFeedTitle(feed),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Column(
+        children: [
+          // Feed title
+          _makeFeedTitle(feed),
 
-        // Feed items
-        Column(
-          children: articleWidgets,
-        )
-      ],
+          // Feed items
+          Column(
+            children: articleWidgets,
+          )
+        ],
+      ),
     );
   }
 
@@ -174,7 +188,7 @@ class _HomeState extends State<Home> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width - 70,
+          width: MediaQuery.of(context).size.width - 75,
           child: Text(
             "${feed.data.title} - ${feed.data.description}",
             overflow: TextOverflow.clip,
@@ -195,41 +209,57 @@ class _HomeState extends State<Home> {
                 dashColor: Colors.blueGrey),
           ),
         ),
-        Text('( ${feed.data.items.length} )',
-            style: GoogleFonts.goudyBookletter1911()),
+        Text(
+          '( ${feed.data.items.length} )',
+          style: GoogleFonts.goudyBookletter1911(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            textStyle: TextStyle(fontStyle: FontStyle.italic),
+          ),
+        ),
       ],
     );
   }
 
   Widget _makeArticleListItem(RssItem item) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 4, 0, 4),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          // Title
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.75,
-            ),
-            child: Text(
-              "${item.title}",
-              maxLines: 1,
-              overflow: TextOverflow.clip,
-              style: GoogleFonts.goudyBookletter1911(
-                textStyle: TextStyle(fontStyle: FontStyle.italic),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          SlideLeftRoute(
+            page: FeedPage(item: item),
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 4, 0, 4),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            // Title
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.75,
+              ),
+              child: Text(
+                "${item.title}",
+                maxLines: 1,
+                overflow: TextOverflow.clip,
+                style: GoogleFonts.goudyBookletter1911(
+                  textStyle: TextStyle(fontStyle: FontStyle.italic),
+                ),
               ),
             ),
-          ),
 
-          // Line
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
-              child: _makeDottedLine(),
+            // Line
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
+                child: _makeDottedLine(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -259,4 +289,30 @@ class Feed {
     var rss = await http.read(url);
     data = new RssFeed.parse(rss);
   }
+}
+
+class SlideLeftRoute extends PageRouteBuilder {
+  final Widget page;
+  SlideLeftRoute({this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
+        );
 }
