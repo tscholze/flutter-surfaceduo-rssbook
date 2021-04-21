@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rss_book/ui/region/feed/molecules/book_page.dart';
 import 'package:rss_book/ui/styles/styles.dart';
 
 class TextColumn extends StatelessWidget {

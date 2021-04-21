@@ -26,8 +26,7 @@ class BookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Textual content
@@ -42,14 +41,10 @@ class BookPage extends StatelessWidget {
             ],
           ),
 
-          // Spacer to move footer to the bottom
-          Spacer(),
-
           // Footer / Bottom
-          _makeBottom()
+          _makeBottom(context),
         ],
-      ),
-    );
+      );
   }
 
   // - Private helper -
@@ -62,7 +57,12 @@ class BookPage extends StatelessWidget {
     return Column(
       children: [
         // Title
-        Text(title, textAlign: TextAlign.left, maxLines: 2, style: titleStyle),
+        Text(
+            title,
+            textAlign: TextAlign.left,
+            maxLines: 2,
+            style: titleStyle
+        ),
 
         // Spacer
         SizedBox(
@@ -106,12 +106,13 @@ class BookPage extends StatelessWidget {
     );
   }
 
-  Widget _makeBottom() {
+  Widget _makeBottom(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Top dotted border
-        SizedBox(
-          height: 5,
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
           child: DottedLine(
             dashLength: 1,
             dashGapLength: 3,
@@ -121,12 +122,18 @@ class BookPage extends StatelessWidget {
         ),
 
         // Bottom text
-        Text(
-          "Page $pageNumber",
-          style: GoogleFonts.goudyBookletter1911(
-            fontSize: 10,
-            color: Colors.blueGrey,
-          ),
+        InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child:  Text(
+            "< Tap to go back",
+            style: GoogleFonts.goudyBookletter1911(
+              fontSize: 12,
+              color: Colors.blueGrey,
+              fontWeight: FontWeight.bold,
+            ),
+        ),
         )
       ],
     );
