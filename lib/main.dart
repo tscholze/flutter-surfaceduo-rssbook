@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'RSSBook - für dein Surface Duo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

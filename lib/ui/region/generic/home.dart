@@ -14,15 +14,12 @@ class _HomeState extends State<Home> {
 
   List<Feed> _feeds = [
     Feed("https://www.drwindows.de/news/feed"),
+    Feed("https://www.drwindows.de/news/feed"),
+    Feed("https://www.drwindows.de/news/feed"),
   ];
 
   @override
   void initState() {
-    // Load ech feed.
-    _feeds.forEach((element) {
-      element.load();
-    });
-
     // Call super init.
     super.initState();
   }
@@ -34,7 +31,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: FutureBuilder(
         // Initialize FlutterFire:
-        future: _feeds[0].load(),
+        future:
+            Future.wait([_feeds[0].load(), _feeds[1].load(), _feeds[2].load()]),
         builder: (context, snapshot) {
           // 1. Handle errors.
           if (snapshot.hasError) {
@@ -94,36 +92,59 @@ class _HomeState extends State<Home> {
   }
 
   Widget _makeBody() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
-      child: Column(
-        children: [
-          // Title.
-          _makeTitle(),
+    return Column(
+      children: [
+        ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height - 50),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
+              child: Column(
+                children: [
+                  // Title.
+                  _makeTitle(),
 
-          // Table of content.
-          // Expands.
-          _makeList(),
+                  // Table of content.
+                  // Expands.
+                  _makeList(),
+                ],
+              ),
+            ),
+          ),
+        ),
 
-          // Footer.
-          _makeFooter()
-        ],
-      ),
+        // Footer.
+        _makeFooter()
+      ],
     );
   }
 
   Widget _makeFooter() {
-    return Text("Made with Flutter and <3.",
-        style: GoogleFonts.goudyBookletter1911(), textAlign: TextAlign.center);
+    return Column(
+      children: [
+        _makeDottedLine(),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text("Made with Flutter and <3.",
+              style: GoogleFonts.goudyBookletter1911(color: Colors.grey),
+              textAlign: TextAlign.center),
+        ),
+      ],
+    );
   }
 
   Widget _makeList() {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: _feeds.length,
-        itemBuilder: (context, position) {
-          return _makeFeedListItem(_feeds[position]);
-        },
+    List<Widget> items = [];
+    _feeds.forEach((element) {
+      items.add(_makeFeedListItem(element));
+    });
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: Expanded(
+        child: Column(
+          children: items,
+        ),
       ),
     );
   }
@@ -187,12 +208,17 @@ class _HomeState extends State<Home> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           // Title
-          Text(
-            "${item.title}",
-            maxLines: 1,
-            overflow: TextOverflow.clip,
-            style: GoogleFonts.goudyBookletter1911(
-              textStyle: TextStyle(fontStyle: FontStyle.italic),
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width * 0.75,
+            ),
+            child: Text(
+              "${item.title}",
+              maxLines: 1,
+              overflow: TextOverflow.clip,
+              style: GoogleFonts.goudyBookletter1911(
+                textStyle: TextStyle(fontStyle: FontStyle.italic),
+              ),
             ),
           ),
 
@@ -200,19 +226,20 @@ class _HomeState extends State<Home> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
-              child: DottedLine(
-                  dashLength: 1,
-                  dashGapLength: 3,
-                  lineThickness: 1,
-                  dashColor: Colors.blueGrey),
+              child: _makeDottedLine(),
             ),
           ),
-
-          // Something
-          Text("data")
         ],
       ),
     );
+  }
+
+  Widget _makeDottedLine() {
+    return DottedLine(
+        dashLength: 1,
+        dashGapLength: 3,
+        lineThickness: 1,
+        dashColor: Colors.blueGrey);
   }
 }
 
