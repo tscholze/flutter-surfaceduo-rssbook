@@ -1,9 +1,9 @@
 import 'package:dart_rss/dart_rss.dart';
 import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
+import 'package:rss_book/models/feed.dart';
+import 'package:rss_book/ui/transitions/slide_left_route.dart';
 
 import '../feed/feed_page.dart';
 
@@ -17,15 +17,9 @@ class _HomeState extends State<Home> {
 
   List<Feed> _feeds = [
     Feed("https://www.drwindows.de/news/feed"),
-    Feed("https://www.drwindows.de/news/feed"),
-    Feed("https://www.drwindows.de/news/feed"),
+    Feed("https://www.apfeltalk.de/magazin/feed/"),
+    Feed("https://tscholze.uber.space/feed"),
   ];
-
-  @override
-  void initState() {
-    // Call super init.
-    super.initState();
-  }
 
   // - Overrides -
 
@@ -33,7 +27,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        // Initialize FlutterFire:
         future:
             Future.wait([_feeds[0].load(), _feeds[1].load(), _feeds[2].load()]),
         builder: (context, snapshot) {
@@ -183,12 +176,13 @@ class _HomeState extends State<Home> {
     );
   }
 
+  /// Creates a feed title wdget based on given [feed].
   Widget _makeFeedTitle(Feed feed) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width - 75,
+          width: MediaQuery.of(context).size.width - 80,
           child: Text(
             "${feed.data.title} - ${feed.data.description}",
             overflow: TextOverflow.clip,
@@ -221,6 +215,7 @@ class _HomeState extends State<Home> {
     );
   }
 
+/// Creates an article list item based on given [item].
   Widget _makeArticleListItem(RssItem item) {
     return InkWell(
       onTap: () {
@@ -271,48 +266,4 @@ class _HomeState extends State<Home> {
         lineThickness: 1,
         dashColor: Colors.blueGrey);
   }
-}
-
-class Feed {
-  // - Properties -
-
-  final String url;
-  RssFeed data;
-
-  // - Init -
-
-  Feed(this.url) : super();
-
-  // - Helper -
-
-  Future<void> load() async {
-    var rss = await http.read(url);
-    data = new RssFeed.parse(rss);
-  }
-}
-
-class SlideLeftRoute extends PageRouteBuilder {
-  final Widget page;
-  SlideLeftRoute({this.page})
-      : super(
-          pageBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-          ) =>
-              page,
-          transitionsBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-            Widget child,
-          ) =>
-              SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(1, 0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          ),
-        );
 }

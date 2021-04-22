@@ -7,7 +7,7 @@ import 'package:rss_book/ui/region/feed/molecules/book_page.dart';
 // https://stackoverflow.com/questions/51640388/flutter-textpainter-vs-paragraph-for-drawing-book-page
 class FeedPage extends StatefulWidget {
   // - Private properties -
-  RssItem item;
+  final RssItem item;
 
   // - Init -
   FeedPage({this.item});
@@ -53,19 +53,15 @@ class _FeedPageState extends State<FeedPage> {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(20),
-            child: _makeSingleScreenContent(
-            widget.item.title,
-            removeAllHtmlTags(widget.item.content.value),
-            4,
-          ),
-          ),
+            child: _makeSingleScreenContent(widget.item),
+          )
         ),
       ),
     );
   }
 
   //  Builds the dual screen content.
-  Widget _makeDualScreenContent(String content) {
+  Widget _makeDualScreenContent(RssItem item) {
     return Row(
       children: [
         // Left
@@ -74,9 +70,7 @@ class _FeedPageState extends State<FeedPage> {
           child: Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
             child: BookPage(
-              title: "Flutter + Surface Duo is awesome!",
-              content: content,
-              pageNumber: 1,
+              item: item,
               isDuo: _isDuo,
             ),
           ),
@@ -89,8 +83,7 @@ class _FeedPageState extends State<FeedPage> {
         Flexible(
           flex: 1,
           child: BookPage(
-            content: content,
-            pageNumber: 2,
+            item: item,
             isDuo: _isDuo,
           ),
         ),
@@ -99,12 +92,9 @@ class _FeedPageState extends State<FeedPage> {
   }
 
   // Builds the single screen content.
-  Widget _makeSingleScreenContent(
-      String title, String content, int pageNumber) {
+  Widget _makeSingleScreenContent(RssItem item) {
     return BookPage(
-      title: title,
-      content: content,
-      pageNumber: pageNumber,
+      item: item,
       isDuo: _isDuo,
     );
   }
