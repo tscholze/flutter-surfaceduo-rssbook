@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:multiple_screens/multiple_screens.dart';
 import 'package:rss_book/ui/region/feed/molecules/book_page.dart';
 
-// https://stackoverflow.com/questions/51640388/flutter-textpainter-vs-paragraph-for-drawing-book-page
 class FeedPage extends StatefulWidget {
   // - Private properties -
   final RssItem item;

@@ -1,11 +1,10 @@
 import 'package:dart_rss/dart_rss.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:rss_book/ui/region/feed/feed_page.dart';
 import 'package:rss_book/ui/region/feed/molecules/text_column.dart';
 import 'package:rss_book/ui/styles/styles.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:rss_book/utils/utils.dart';
 
 class BookPage extends StatelessWidget {
   // - Static properties -
@@ -20,32 +19,31 @@ class BookPage extends StatelessWidget {
 
   // - Init -
 
-  const BookPage({this.item, this.isDuo})
-      : super();
+  const BookPage({this.item, this.isDuo}) : super();
 
   // - Overriders -
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Textual content
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Optional header.
-              _makeTitleIfRequired(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Textual content
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Optional header.
+            _makeTitleIfRequired(),
 
-              // Content
-             isDuo ? _makeDuoContent(context) : _makeNonDuoContent()
-            ],
-          ),
+            // Content
+            isDuo ? _makeDuoContent(context) : _makeNonDuoContent()
+          ],
+        ),
 
-          // Footer / Bottom
-          _makeBottom(context),
-        ],
-      );
+        // Footer / Bottom
+        _makeBottom(context),
+      ],
+    );
   }
 
   // - Private helper -
@@ -58,12 +56,8 @@ class BookPage extends StatelessWidget {
     return Column(
       children: [
         // Title
-        Text(
-            item.title,
-            textAlign: TextAlign.left,
-            maxLines: 2,
-            style: titleStyle
-        ),
+        Text(item.title,
+            textAlign: TextAlign.left, maxLines: 2, style: titleStyle),
 
         // Spacer
         SizedBox(
@@ -125,42 +119,33 @@ class BookPage extends StatelessWidget {
         // Bottom  back button
         Row(
           children: [
+            // Left button.
             InkWell(
               onTap: () {
                 Navigator.pop(context);
               },
-              child:  Text(
+              child: Text(
                 "< Tap to go back",
-                style: GoogleFonts.goudyBookletter1911(
-                  fontSize: 12,
-                  color: Colors.blueGrey,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: body1Style,
               ),
             ),
 
+            // Spacer.
             Spacer(),
 
+            // Right button.
             InkWell(
               onTap: () {
-                _launchURL("https://google.com");
+                launchURL(item.link);
               },
-              child:  Text(
-                "Open in browser",
-                style: GoogleFonts.goudyBookletter1911(
-                  fontSize: 12,
-                  color: Colors.blueGrey,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Text(
+                "Open post in browser",
+                style: body1Style,
               ),
             ),
           ],
         )
-
       ],
     );
   }
 }
-
-void _launchURL(String url) async =>
-    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';

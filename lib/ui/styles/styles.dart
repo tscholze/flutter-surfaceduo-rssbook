@@ -2,10 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final titleStyle = GoogleFonts.goudyBookletter1911(
-  textStyle: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+  fontSize: 32,
+  fontWeight: FontWeight.bold,
 );
 
-final body2TextStyle =     TextStyle(fontSize: 12, color: Colors.black87, letterSpacing: 1.1);
+final subtitleStyle = GoogleFonts.goudyBookletter1911(
+  fontSize: 21,
+  fontStyle: FontStyle.italic,
+);
 
-final pageTextStyle =
-    TextStyle(fontSize: 16, color: Colors.black87, letterSpacing: 1.3);
+final body1Style = GoogleFonts.goudyBookletter1911(
+  fontSize: 12,
+  color: Colors.black87,
+  letterSpacing: 1.1,
+);
+
+final body2Style = GoogleFonts.goudyBookletter1911(
+  fontSize: 16,
+  color: Colors.black87,
+  letterSpacing: 1.3,
+);

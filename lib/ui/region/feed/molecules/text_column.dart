@@ -18,7 +18,7 @@ class TextColumn extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.justify,
-      style: GoogleFonts.goudyBookletter1911(textStyle: pageTextStyle),
+      style: GoogleFonts.goudyBookletter1911(textStyle: body2Style),
     );
   }
 }

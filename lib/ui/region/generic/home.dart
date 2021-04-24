@@ -3,7 +3,10 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rss_book/models/feed.dart';
+import 'package:rss_book/ui/styles/styles.dart';
 import 'package:rss_book/ui/transitions/slide_left_route.dart';
+import 'package:rss_book/utils/ui_utils.dart';
+import 'package:rss_book/utils/utils.dart';
 
 import '../feed/feed_page.dart';
 
@@ -69,22 +72,17 @@ class _HomeState extends State<Home> {
         // Title.
         Text(
           "The Feed's Book",
-          style: GoogleFonts.goudyBookletter1911(
-              fontSize: 36, fontWeight: FontWeight.w900),
+          style: titleStyle,
         ),
 
         // Sub title.
         Text(
           "Read your feeds in a classic manor.",
-          style: GoogleFonts.goudyBookletter1911(
-            textStyle: Theme.of(context).textTheme.subtitle1,
-            fontSize: 21,
-            fontStyle: FontStyle.italic,
-          ),
+          style: subtitleStyle,
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-          child: _makeDottedLine(),
+          child: makeDottedLine(),
         )
       ],
     );
@@ -109,33 +107,67 @@ class _HomeState extends State<Home> {
                   _makeList(),
                 ],
               ),
+
             ),
           ),
         ),
-
-        // Footer.
-        _makeFooter()
+        // Bottom
+        _makeBottom(
+          context,
+        ),
       ],
     );
   }
 
-  Widget _makeFooter() {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 8),
-          child: _makeDottedLine(),
-        ),
-        RichText(
-          text: new TextSpan(
-            style: GoogleFonts.goudyBookletter1911(color: Colors.grey),
-            children: <TextSpan>[
-              new TextSpan(text: 'Made with Flutter and '),
-              new TextSpan(text: '❤', style: new TextStyle(fontSize: 8)),
-            ],
+  Widget _makeBottom(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Top dotted border
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+            child: DottedLine(
+              dashLength: 1,
+              dashGapLength: 3,
+              lineThickness: 1,
+              dashColor: Colors.blueGrey,
+            ),
           ),
-        ),
-      ],
+
+          // Bottom  back button
+          Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child:  RichText(
+                  text: new TextSpan(
+                    style: body1Style,
+                    children: <TextSpan>[
+                      new TextSpan(text: 'Made with Flutter and '),
+                      new TextSpan(text: '❤', style: new TextStyle(fontSize: 8)),
+                    ],
+                  ),
+                ),
+              ),
+              Spacer(),
+              InkWell(
+                onTap: () {
+                  launchURL(
+                      "https://github.com/tscholze/flutter-surfaceduo-rssbook");
+                },
+                child: Text(
+                  "Show app on GitHub",
+                  style: body1Style,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -176,7 +208,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  /// Creates a feed title wdget based on given [feed].
+  /// Creates a feed title widget based on given [feed].
   Widget _makeFeedTitle(Feed feed) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -196,11 +228,7 @@ class _HomeState extends State<Home> {
         Expanded(
           child: Padding(
             padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
-            child: DottedLine(
-                dashLength: 1,
-                dashGapLength: 3,
-                lineThickness: 1,
-                dashColor: Colors.blueGrey),
+            child: makeDottedLine(),
           ),
         ),
         Text(
@@ -215,7 +243,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-/// Creates an article list item based on given [item].
+  /// Creates an article list item based on given [item].
   Widget _makeArticleListItem(RssItem item) {
     return InkWell(
       onTap: () {
@@ -250,20 +278,12 @@ class _HomeState extends State<Home> {
             Expanded(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(8, 0, 8, 4),
-                child: _makeDottedLine(),
+                child: makeDottedLine(),
               ),
             ),
           ],
         ),
       ),
     );
-  }
-
-  Widget _makeDottedLine() {
-    return DottedLine(
-        dashLength: 1,
-        dashGapLength: 3,
-        lineThickness: 1,
-        dashColor: Colors.blueGrey);
   }
 }
