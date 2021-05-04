@@ -1,6 +1,14 @@
-# rss_book
+![App Icon](https://github.com/tscholze/flutter-surfaceduo-rssbook/blob/main/assets/ic_launcher.png?raw=true "App Icon")
+
+# RssBook for Surface Duo
 
 > Read your RSS feed like it would be an ebook - A sample Android app that demonstrates the unique features of a Surface Duo.
+
+### Build status
+
+|Service|Status|
+|-------|------|
+|GitHub|[![Dart](https://github.com/tscholze/flutter-surfaceduo-rssbook/actions/workflows/build_app.yml/badge.svg)](https://github.com/tscholze/flutter-surfaceduo-rssbook/actions/workflows/build_app.yml)
 
 ### Prerequisites
 
@@ -14,19 +22,30 @@
 1. [x] Get Flutter project running
 2. [x] Get Surface Duo setup running
 3. [x] Embed Google Fonts to be more book-ish
-4. [ ] Split content string into n-amount of Text widges to be column-ish
-5. [ ] Embed external rss feed
-6. [ ] Make app multi feed able
-7. [ ] Check on localization
-8. [ ] Check on publishing to the Play Store
+5. [x] Embed external rss feed
+6. [x] Make app multi feed able
+7. [x] Make app able to run on single screen devices
+9. [ ] Make app able to run on dual screen devices
+10. [ ] Check on how to embedd localization
+11.[ ] Check on publishing to the Play Store
+
+### Abondend ideas
+- Make the app look like an ebook reader with page curl effect
+- Support more than one dual screen orientation or gesture
+- Make rss post content always good looking and well formatted
 
 ### Caution
 
 I'm very new to Flutter, Android and dual screen devices, please do not use this repository as the only source of truth in regard to Flutter or dual screen development.
 
 ### How it looks
+#### Single screen devices
 
-![App](docs/app.png "App")
+![Screenshots](/docs/screenshots.png?raw=true "Screenshots")
+
+### Dual screen devices
+
+TBD
 
 ### How to run
 
@@ -38,14 +57,14 @@ I'm very new to Flutter, Android and dual screen devices, please do not use this
 
 ### Contributing
 
-This is a one-time-example, there will maybe no further development (maybe platform verison bumps fixes). But for now it would be awesome if expierenced Flutter developers could help me with some topic.
+This is a one-time-example, there will maybe no further development (maybe platform version bumps fixes). But for now it would be awesome if expierenced Flutter developers could help me with some topic.
 
 ### Authors
 
 Just me, [Tobi]([https://tscholze.github.io).
 
 
-## Acknowledgments
+### Acknowledgments
 
 * [Flutter's Reddit](https://www.reddit.com/r/flutterhelp/) community
 * [Flutter's Discord](https://discord.gg/N7Yshp4) server
