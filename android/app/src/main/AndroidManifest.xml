@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.tscholze.rss_book">
    <application
-        android:label="rss_book"
+        android:label="RssBook for Surface Duo"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
