@@ -16,7 +16,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // Private properties
+
+  // - Private properties -
 
   List<Feed> _feeds = [
     Feed("https://www.drwindows.de/news/feed"),
@@ -28,6 +29,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: FutureBuilder(
         future:
@@ -47,6 +49,7 @@ class _HomeState extends State<Home> {
           return _makeProgressIndicator();
         },
       ),
+
     );
   }
 
@@ -107,7 +110,6 @@ class _HomeState extends State<Home> {
                   _makeList(),
                 ],
               ),
-
             ),
           ),
         ),
@@ -284,6 +286,17 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+    );
+  }
+
+  void _showToast(BuildContext context) {
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content:
+        Center(
+          child: Text("TEST")
+        )
+      )
     );
   }
 }

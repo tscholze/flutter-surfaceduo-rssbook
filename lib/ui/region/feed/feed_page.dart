@@ -6,9 +6,12 @@ import 'package:rss_book/ui/region/feed/molecules/book_page.dart';
 
 class FeedPage extends StatefulWidget {
   // - Private properties -
+
+  /// Underlying item (data source) of the widget.
   final RssItem item;
 
   // - Init -
+
   FeedPage({this.item});
 
   // - Overrides -
@@ -18,18 +21,22 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  // Method channel
+  // - Private properties -
+
+  /// Method channel
   final _duoPlatform = const MethodChannel('duosdk.microsoft.dev');
 
-  // Determines if the app runs on a Duo.
+  /// Determines if the app runs on a Duo.
   bool _isDuo = false;
 
-  // Determines if the app runs on a Duo and is
-  // spanned.
+  /// Determines if the app runs on a Duo and is
+  /// spanned.
   bool _isDuoSpanned = false;
 
-  // Gets the actual hinge size.
+  /// Gets the actual hinge size.
   double _hingeSize = 0.0;
+
+  // - Life cycle -
 
   @override
   void initState() {
@@ -50,16 +57,17 @@ class _FeedPageState extends State<FeedPage> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: _makeSingleScreenContent(widget.item),
-          )
-        ),
+            child: Padding(
+          padding: EdgeInsets.all(20),
+          child: _makeSingleScreenContent(widget.item),
+        )),
       ),
     );
   }
 
-  //  Builds the dual screen content.
+  // - Helper -
+
+  ///  Builds the dual screen content.
   Widget _makeDualScreenContent(RssItem item) {
     return Row(
       children: [
@@ -90,7 +98,7 @@ class _FeedPageState extends State<FeedPage> {
     );
   }
 
-  // Builds the single screen content.
+  /// Builds the single screen content.
   Widget _makeSingleScreenContent(RssItem item) {
     return BookPage(
       item: item,
@@ -98,6 +106,7 @@ class _FeedPageState extends State<FeedPage> {
     );
   }
 
+  /// Checks if app runs on a Microsoft Surface Duo
   void _checkForDuo() async {
     try {
       _isDuo = await MultipleScreensMethods.isMultipleScreensDevice;
@@ -107,10 +116,4 @@ class _FeedPageState extends State<FeedPage> {
       _isDuoSpanned = false;
     }
   }
-}
-
-String removeAllHtmlTags(String htmlText) {
-  RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
-
-  return htmlText.replaceAll(exp, '');
 }
