@@ -1,6 +1,4 @@
-![App Icon](https://github.com/tscholze/flutter-surfaceduo-rssbook/blob/main/assets/ic_launcher.png?raw=true "App Icon")
-
-# RssBook for Surface Duo
+![App Icon](docs/logo.png?raw=true "App Icon")
 
 > Read your RSS feed like it would be an ebook - A sample Android app that demonstrates the unique features of a Surface Duo.
 
