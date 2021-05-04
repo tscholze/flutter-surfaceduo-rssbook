@@ -10,13 +10,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-  google_fonts:
-  multiple_screens:
-  dotted_line: 3.0.0
-  dart_rss: ^1.0.1
-  http:
-  url_launcher:
-  font_awesome_flutter:
+  google_fonts: "^1.1.2"
+  multiple_screens: "^0.2.0"  #Get rid of it after Flutter supports DSDs.
+  dotted_line: "^3.0.0"
+  dart_rss: "^1.0.1"
+  http: "^0.12.2"
+  url_launcher: "^6.0.3"
+  font_awesome_flutter: "^9.0.0"
 
 dev_dependencies:
   flutter_test:
