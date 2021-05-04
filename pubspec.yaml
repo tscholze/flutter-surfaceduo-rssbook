@@ -16,6 +16,7 @@ dependencies:
   dart_rss: ^1.0.1
   http:
   url_launcher:
+  font_awesome_flutter:
 
 dev_dependencies:
   flutter_test:

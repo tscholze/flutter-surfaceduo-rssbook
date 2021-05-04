@@ -7,6 +7,7 @@ import 'package:rss_book/ui/styles/styles.dart';
 import 'package:rss_book/ui/transitions/slide_left_route.dart';
 import 'package:rss_book/utils/ui_utils.dart';
 import 'package:rss_book/utils/utils.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../feed/feed_page.dart';
 
@@ -16,7 +17,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   // - Private properties -
 
   /// Hardcoded list of feeds that will be fetched.
@@ -30,7 +30,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: FutureBuilder(
         future:
@@ -50,7 +49,6 @@ class _HomeState extends State<Home> {
           return _makeProgressIndicator();
         },
       ),
-
     );
   }
 
@@ -100,7 +98,7 @@ class _HomeState extends State<Home> {
               maxHeight: MediaQuery.of(context).size.height - 55),
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
+              padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
               child: Column(
                 children: [
                   // Title.
@@ -130,41 +128,66 @@ class _HomeState extends State<Home> {
         children: [
           // Top dotted border
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-            child: DottedLine(
-              dashLength: 1,
-              dashGapLength: 3,
-              lineThickness: 1,
-              dashColor: Colors.blueGrey,
-            ),
+            padding: const EdgeInsets.all(8.0),
+            child: makeDottedLine(),
           ),
 
           // Bottom  back button
           Row(
             children: [
+              // Left button
               InkWell(
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child:  RichText(
-                  text: new TextSpan(
-                    style: body1Style,
-                    children: <TextSpan>[
-                      new TextSpan(text: 'Made with Flutter and '),
-                      new TextSpan(text: '❤', style: new TextStyle(fontSize: 8)),
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.microsoft,
+                          size: 12,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                          child: Text(
+                            "Made with Flutter for Surface Duo",
+                            style: body1Style,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
+
+              // Middle Spacer
               Spacer(),
+
+              // Right button
               InkWell(
                 onTap: () {
                   launchURL(
                       "https://github.com/tscholze/flutter-surfaceduo-rssbook");
                 },
-                child: Text(
-                  "Show app on GitHub",
-                  style: body1Style,
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                          child: Text(
+                            "Visit on GitHub",
+                            style: body1Style,
+                          ),
+                        ),
+                        Icon(
+                          FontAwesomeIcons.github,
+                          size: 12,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -291,13 +314,7 @@ class _HomeState extends State<Home> {
   }
 
   void _showToast(BuildContext context) {
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content:
-        Center(
-          child: Text("TEST")
-        )
-      )
-    );
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Center(child: Text("TEST"))));
   }
 }
