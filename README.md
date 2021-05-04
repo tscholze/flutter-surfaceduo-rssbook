@@ -29,10 +29,10 @@
 10. [ ] Check on how to embedd localization
 11.[ ] Check on publishing to the Play Store
 
-### Abondend ideas
-- Make the app look like an ebook reader with page curl effect
-- Support more than one dual screen orientation or gesture
-- Make rss post content always good looking and well formatted
+### Abandoned ideas
+* Make the app look like an ebook reader with page curl effect
+* Support more than one dual screen orientation or gesture
+* Make rss post content always good looking and well formatted
 
 ### Caution
 
@@ -45,15 +45,16 @@ I'm very new to Flutter, Android and dual screen devices, please do not use this
 
 ### Dual screen devices
 
-TBD
+> Will be added soon.
 
 ### How to run
 
 1. Clone the repo
-2. Start the Android or Surface Duo emulator in Android Studio mode
-3. Select the emulator as device in AS
-4. Run the app
-
+2. Open for example Android Studio
+3. Run `pub get` or use AS
+4. Start and select the emulator in Android Studio mode or connect a real device
+6. Run the app
+7. Have fun!
 
 ### Contributing
 
