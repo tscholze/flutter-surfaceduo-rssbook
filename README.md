@@ -2,19 +2,19 @@
 
 > Read your RSS feed like it would be an ebook - A sample Android app written in Google's Flutter that demonstrates the unique features of a Surface Duo.
 
-### Build status
+## Build status
 
 |Service|Status|
 |-------|------|
 |GitHub|[![Dart](https://github.com/tscholze/flutter-surfaceduo-rssbook/actions/workflows/build_app.yml/badge.svg)](https://github.com/tscholze/flutter-surfaceduo-rssbook/actions/workflows/build_app.yml)
 
-### Prerequisites
+## Prerequisites
 
 * Android Studio
 * Flutter SDK and plugin installed
 * Surface Duo emulator, Android emulator or actual an device
 
-### Checklist
+## Checklist
 
 0. [x] Understand the very basics of Flutter
 1. [x] Get Flutter project running
@@ -27,25 +27,25 @@
 10. [ ] Check on how to embedd localization
 11. [ ] Check on publishing to the Play Store
 
-### Abandoned ideas
+## Abandoned ideas
 * Make the app look like an ebook reader with page curl effect
 * Support more than one dual screen orientation or gesture
 * Make rss post content always good looking and well formatted
 
-### Caution
+## Caution
 
 I'm very new to Flutter, Android and dual screen devices, please do not use this repository as the only source of truth in regard to Flutter or dual screen development.
 
-### How it looks
-#### Single screen devices
+## How it looks
+### Single screen devices
 
 ![Screenshots](/docs/screenshots.png?raw=true "Screenshots")
 
-### Dual screen devices
+## Dual screen devices
 
 > Will be added soon.
 
-### How to run
+## How to run
 
 1. Clone the repo
 2. Open for example in Android Studio or Visual Studio Code
@@ -54,16 +54,16 @@ I'm very new to Flutter, Android and dual screen devices, please do not use this
 6. Run the app
 7. Have fun!
 
-### Contributing
+## Contributing
 
 This is a one-time-example, there will maybe no further development (maybe platform version bumps fixes). But for now it would be awesome if expierenced Flutter developers could help me with some topic.
 
-### Authors
+## Authors
 
 Just me, [Tobi]([https://tscholze.github.io).
 
 
-### Acknowledgments
+## Acknowledgments
 
 * [Flutter's Reddit](https://www.reddit.com/r/flutterhelp/) community
 * [Flutter's Discord](https://discord.gg/N7Yshp4) server
@@ -71,7 +71,7 @@ Just me, [Tobi]([https://tscholze.github.io).
 * [Get Started with Flutter on Surface Duo](https://devblogs.microsoft.com/surface-duo/get-started-with-flutter-on-surface-duo/) Microsoft DevBlog article.
 
 
-### License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 Dependencies or assets maybe licensed differently.
