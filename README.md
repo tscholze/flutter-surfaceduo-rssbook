@@ -25,7 +25,7 @@
 7. [x] Make app able to run on single screen devices
 9. [ ] Make app able to run on dual screen devices
 10. [ ] Check on how to embedd localization
-11.[ ] Check on publishing to the Play Store
+11. [ ] Check on publishing to the Play Store
 
 ### Abandoned ideas
 * Make the app look like an ebook reader with page curl effect
