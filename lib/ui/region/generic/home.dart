@@ -19,6 +19,7 @@ class _HomeState extends State<Home> {
 
   // - Private properties -
 
+  /// Hardcoded list of feeds that will be fetched.
   List<Feed> _feeds = [
     Feed("https://www.drwindows.de/news/feed"),
     Feed("https://www.apfeltalk.de/magazin/feed/"),

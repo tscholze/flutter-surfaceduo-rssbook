@@ -11,7 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'RSSBook - für dein Surface Duo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
+        accentColor: Colors.black,
+        accentColorBrightness: Brightness.light,
       ),
       home: Home(),
     );
