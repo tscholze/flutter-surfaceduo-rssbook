@@ -48,7 +48,7 @@ I'm very new to Flutter, Android and dual screen devices, please do not use this
 ### How to run
 
 1. Clone the repo
-2. Open for example Android Studio
+2. Open for example in Android Studio or Visual Studio Code
 3. Run `pub get` or use AS
 4. Start and select the emulator in Android Studio mode or connect a real device
 6. Run the app
