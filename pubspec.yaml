@@ -1,33 +1,61 @@
+# - General information -
+
 name: rss_book
 description: Read RSS feeds like it would be a good book
 publish_to: 'none'
 version: 1.0.0+1
 
+# - Environment information -
+
 environment:
   sdk: ">=2.07.0 <3.0.0"
+
+# - App dependencies -
 
 dependencies:
   flutter:
     sdk: flutter
 
+  # Used for all fonts
   google_fonts: "^1.1.2"
-  multiple_screens: "^0.2.0"  #Get rid of it after Flutter supports DSDs.
-  dotted_line: "^3.0.0"
-  dart_rss: "^1.0.1"
+
+  # Library for handling dual screen devices.
+  # Get rid of it after Flutter supports DSDs.
+  # This dependency causes the not nullableness.
+  multiple_screens: "^0.2.0"
+
+  # Library for making web requests.
   http: "^0.12.2"
+
+  # Library for parsing RSS and Atom strings.
+  dart_rss: "^1.0.1"
+
+  # Convenient wrapper for creating patterned lines.
+  dotted_line: "^3.0.0"
+
+  # Convenient wrapper for opening urls in the app.
   url_launcher: "^6.0.3"
+
+  # Library for including Font Awesome icons in the app.
   font_awesome_flutter: "^9.0.0"
+
+# - Development / build dependencies -
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Helper to create App Icons
   flutter_launcher_icons: "^0.8.0"
 
+# - Config -
+
+# Configure Flutter in general
+flutter:
+  uses-material-design: true
+
+# Configure app icon generation
 flutter_icons:
   ios: false
   android: true
   image_path: "assets/ic_launcher.png"
-
-flutter:
-  uses-material-design: true
