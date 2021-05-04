@@ -1,6 +1,6 @@
 ![App Icon](docs/logo.png?raw=true "App Icon")
 
-> Read your RSS feed like it would be an ebook - A sample Android app that demonstrates the unique features of a Surface Duo.
+> Read your RSS feed like it would be an ebook - A sample Android app written in Google's Flutter that demonstrates the unique features of a Surface Duo.
 
 ### Build status
 
