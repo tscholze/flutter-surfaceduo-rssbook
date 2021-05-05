@@ -14,7 +14,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../feed/feed_page.dart';
 
 class HomeDualScreen extends StatefulWidget {
-
   // - Overrides -
 
   @override
@@ -24,14 +23,20 @@ class HomeDualScreen extends StatefulWidget {
 class _HomeDualScreenState extends State<HomeDualScreen> {
   // - Private properties -
 
-  Widget _rightWidget = Center(child: Text("Test"),);
-
   /// Hardcoded list of feeds that will be fetched.
   List<Feed> _feeds = [
     Feed("https://www.drwindows.de/news/feed"),
     Feed("https://www.apfeltalk.de/magazin/feed/"),
     Feed("https://tscholze.uber.space/feed"),
   ];
+
+  /// Selected widget on the right side.
+  Widget _rightWidget = Center(
+    child: Text(
+      "Please select an article.",
+      style: titleStyle,
+    ),
+  );
 
   // - Overrides -
 
@@ -46,41 +51,34 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
 
   // - Helper -
 
+  /// Makes the left side widget tree.
   Widget _makeLeftSide() {
     return FutureBuilder(
-        future:
-        Future.wait([_feeds[0].load(), _feeds[1].load(), _feeds[2].load()]),
-        builder: (context, snapshot) {
-          // 1. Handle errors.
-          if (snapshot.hasError) {
-            return _makeErrorText(snapshot.error);
-          }
+      future:
+          Future.wait([_feeds[0].load(), _feeds[1].load(), _feeds[2].load()]),
+      builder: (context, snapshot) {
+        // 1. Handle errors.
+        if (snapshot.hasError) {
+          return _makeErrorText(snapshot.error);
+        }
 
-          // 2. Check if futures has been completed.
-          if (snapshot.connectionState == ConnectionState.done) {
-            return _makeBody();
-          }
+        // 2. Check if futures has been completed.
+        if (snapshot.connectionState == ConnectionState.done) {
+          return _makeBody();
+        }
 
-          // Otherwise, show loading indicator.
-          return _makeProgressIndicator();
-        },
-      );
+        // Otherwise, show loading indicator.
+        return _makeProgressIndicator();
+      },
+    );
   }
-
-  Widget _makeRightSide() {
-    /*
-    return Center (
-      child: Text(
-        "Select an article on the right side",
-        style: titleStyle,
-      ),
-    );*/
-  }
-// - Helper -
 
   Widget _makeErrorText(Error error) {
     return Center(
-      child: Text(error.toString()),
+      child: Text(
+        error.toString(),
+        style: body1Style,
+      ),
     );
   }
 
@@ -297,9 +295,9 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
   Widget _makeArticleListItem(RssItem item) {
     return InkWell(
       onTap: () {
-      setState(() {
-        _rightWidget = FeedPage(item: item);
-      });
+        setState(() {
+          _rightWidget = FeedPage(item: item);
+        });
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(12, 4, 0, 4),
@@ -332,10 +330,5 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
         ),
       ),
     );
-  }
-
-  void _showToast(BuildContext context) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Center(child: Text("TEST"))));
   }
 }
