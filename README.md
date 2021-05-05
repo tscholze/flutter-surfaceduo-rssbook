@@ -41,7 +41,7 @@ I'm very new to Flutter, Android and dual screen devices, please do not use this
 
 ### Dual screen devices
 
-![Dual Screen Screenshots](/docs/screenshots-ds.png.png?raw=true "Dual Screen Screenshots")
+![Dual Screen Screenshots](/docs/screenshots-ds.png?raw=true "Dual Screen Screenshots")
 
 ### Single screen devices
 
