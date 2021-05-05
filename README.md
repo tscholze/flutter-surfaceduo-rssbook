@@ -23,9 +23,10 @@
 5. [x] Embed external rss feed
 6. [x] Make app multi feed able
 7. [x] Make app able to run on single screen devices
-9. [ ] Make app able to run on dual screen devices
+9. [x] Make app able to run on dual screen devices
 10. [ ] Check on how to embedd localization
-11. [ ] Check on publishing to the Play Store
+11. [ ] Clean up some Flutter beingger's mess
+12. [ ] Check on publishing to the Play Store
 
 ## Abandoned ideas
 * Make the app look like an ebook reader with page curl effect
@@ -37,13 +38,14 @@
 I'm very new to Flutter, Android and dual screen devices, please do not use this repository as the only source of truth in regard to Flutter or dual screen development.
 
 ## How it looks
+
+### Dual screen devices
+
+![Dual Screen Screenshots](/docs/screenshots-ds.png.png?raw=true "Dual Screen Screenshots")
+
 ### Single screen devices
 
-![Screenshots](/docs/screenshots.png?raw=true "Screenshots")
-
-## Dual screen devices
-
-> Will be added soon.
+![Screenshots](/docs/screenshots.png?raw=true "Screenshots") 
 
 ## How to run
 
