@@ -1,46 +1,64 @@
-# rss_book
+![App Icon](docs/logo.png?raw=true "App Icon")
 
-> Read your RSS feed like it would be an ebook - A sample Android app that demonstrates the unique features of a Surface Duo.
+> Read your RSS feed like it would be an ebook - A sample Android app written in Google's Flutter that demonstrates the unique features of a Surface Duo.
 
-### Prerequisites
+## Build status
+
+|Service|Status|
+|-------|------|
+|GitHub|[![Dart](https://github.com/tscholze/flutter-surfaceduo-rssbook/actions/workflows/build_app.yml/badge.svg)](https://github.com/tscholze/flutter-surfaceduo-rssbook/actions/workflows/build_app.yml)
+
+## Prerequisites
 
 * Android Studio
 * Flutter SDK and plugin installed
 * Surface Duo emulator, Android emulator or actual an device
 
-### Checklist
+## Checklist
 
 0. [x] Understand the very basics of Flutter
 1. [x] Get Flutter project running
 2. [x] Get Surface Duo setup running
 3. [x] Embed Google Fonts to be more book-ish
-4. [ ] Split content string into n-amount of Text widges to be column-ish
-5. [ ] Embed external rss feed
-6. [ ] Make app multi feed able
-7. [ ] Check on localization
-8. [ ] Check on publishing to the Play Store
+5. [x] Embed external rss feed
+6. [x] Make app multi feed able
+7. [x] Make app able to run on single screen devices
+9. [ ] Make app able to run on dual screen devices
+10. [ ] Check on how to embedd localization
+11. [ ] Check on publishing to the Play Store
 
-### Caution
+## Abandoned ideas
+* Make the app look like an ebook reader with page curl effect
+* Support more than one dual screen orientation or gesture
+* Make rss post content always good looking and well formatted
+
+## Caution
 
 I'm very new to Flutter, Android and dual screen devices, please do not use this repository as the only source of truth in regard to Flutter or dual screen development.
 
-### How it looks
+## How it looks
+### Single screen devices
 
-![App](docs/app.png "App")
+![Screenshots](/docs/screenshots.png?raw=true "Screenshots")
 
-### How to run
+## Dual screen devices
+
+> Will be added soon.
+
+## How to run
 
 1. Clone the repo
-2. Start the Android or Surface Duo emulator in Android Studio mode
-3. Select the emulator as device in AS
-4. Run the app
+2. Open for example in Android Studio or Visual Studio Code
+3. Run `pub get` or use AS
+4. Start and select the emulator in Android Studio mode or connect a real device
+6. Run the app
+7. Have fun!
 
+## Contributing
 
-### Contributing
+This is a one-time-example, there will maybe no further development (maybe platform version bumps fixes). But for now it would be awesome if expierenced Flutter developers could help me with some topic.
 
-This is a one-time-example, there will maybe no further development (maybe platform verison bumps fixes). But for now it would be awesome if expierenced Flutter developers could help me with some topic.
-
-### Authors
+## Authors
 
 Just me, [Tobi]([https://tscholze.github.io).
 
@@ -53,7 +71,7 @@ Just me, [Tobi]([https://tscholze.github.io).
 * [Get Started with Flutter on Surface Duo](https://devblogs.microsoft.com/surface-duo/get-started-with-flutter-on-surface-duo/) Microsoft DevBlog article.
 
 
-### License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 Dependencies or assets maybe licensed differently.
