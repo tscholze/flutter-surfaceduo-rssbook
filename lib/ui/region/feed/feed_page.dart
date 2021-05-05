@@ -29,10 +29,6 @@ class _FeedPageState extends State<FeedPage> {
   /// Determines if the app runs on a Duo.
   bool _isDuo = false;
 
-  /// Determines if the app runs on a Duo and is
-  /// spanned.
-  bool _isDuoSpanned = false;
-
   /// Gets the actual hinge size.
   double _hingeSize = 0.0;
 
@@ -41,11 +37,6 @@ class _FeedPageState extends State<FeedPage> {
   @override
   void initState() {
     super.initState();
-
-    // Listen to changes.
-    MultipleScreensMethods.isAppSpannedStream().listen(
-      (data) => setState(() => _isDuoSpanned = data),
-    );
 
     // Check if it is a Duo.
     // If yes, set e.g. hinge size.
@@ -57,63 +48,31 @@ class _FeedPageState extends State<FeedPage> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-            child: Padding(
-          padding: EdgeInsets.all(20),
-          child: _makeSingleScreenContent(widget.item),
-        )),
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: BookPage(
+              item: widget.item,
+              isDuo: _isDuo,
+            ),
+          ),
+        ),
       ),
     );
   }
 
   // - Helper -
 
-  ///  Builds the dual screen content.
-  Widget _makeDualScreenContent(RssItem item) {
-    return Row(
-      children: [
-        // Left
-        Flexible(
-          flex: 1,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-            child: BookPage(
-              item: item,
-              isDuo: _isDuo,
-            ),
-          ),
-        ),
-
-        // Hinge spacer
-        SizedBox(width: _hingeSize),
-
-        // Right
-        Flexible(
-          flex: 1,
-          child: BookPage(
-            item: item,
-            isDuo: _isDuo,
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// Builds the single screen content.
-  Widget _makeSingleScreenContent(RssItem item) {
-    return BookPage(
-      item: item,
-      isDuo: _isDuo,
-    );
-  }
-
   /// Checks if app runs on a Microsoft Surface Duo
   void _checkForDuo() async {
     try {
-      _isDuo = await MultipleScreensMethods.isMultipleScreensDevice;
-      _hingeSize = await _duoPlatform.invokeMethod('gethingeSize');
+      var tmpIsDuo = await MultipleScreensMethods.isMultipleScreensDevice;
+      setState(() {
+        _isDuo = tmpIsDuo;
+      });
     } catch (_) {
-      _isDuo = false;
-      _isDuoSpanned = false;
+      setState(() {
+        _isDuo = false;
+      });
     }
   }
 }
