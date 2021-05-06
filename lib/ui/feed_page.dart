@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:multiple_screens/multiple_screens.dart';
-import 'package:rss_book/ui/region/feed/molecules/book_page.dart';
+import 'package:rss_book/ui/book_page.dart';
 import 'package:rss_book/ui/styles/styles.dart';
 import 'package:rss_book/utils/utils.dart';
 

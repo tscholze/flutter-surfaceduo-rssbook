@@ -1,13 +1,11 @@
 import 'package:dart_rss/dart_rss.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:rss_book/ui/region/feed/feed_page.dart';
-import 'package:rss_book/ui/region/feed/molecules/text_column.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rss_book/ui/styles/styles.dart';
 import 'package:rss_book/utils/utils.dart';
 
 class BookPage extends StatelessWidget {
-
   // - Final fields -
 
   final RssItem item;
@@ -51,10 +49,10 @@ class BookPage extends StatelessWidget {
       children: [
         // Title
         Text(
-            item.title,
-            textAlign: TextAlign.left,
-            maxLines: 2,
-            style: titleStyle,
+          item.title,
+          textAlign: TextAlign.left,
+          maxLines: 2,
+          style: titleStyle,
         ),
 
         // Spacer
@@ -69,7 +67,6 @@ class BookPage extends StatelessWidget {
   /// Builds the content for Duo devices.
   /// -> Large screens.
   Widget _makeDuoContent(BuildContext context) {
-
     var segments = _getContentSegments();
 
     return Row(
@@ -78,14 +75,7 @@ class BookPage extends StatelessWidget {
         // Left column
         SizedBox(
           width: MediaQuery.of(context).size.width / _getDivider() - 50,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              TextColumn(
-                text: segments[0],
-              ),
-            ],
-          ),
+          child: _makeTextColumn(segments[1]),
         ),
 
         // Spacer between columns
@@ -96,9 +86,7 @@ class BookPage extends StatelessWidget {
         // Right column
         SizedBox(
           width: MediaQuery.of(context).size.width / _getDivider() - 50,
-          child: TextColumn(
-            text: segments[1],
-          ),
+          child: _makeTextColumn(segments[1]),
         )
       ],
     );
@@ -107,8 +95,16 @@ class BookPage extends StatelessWidget {
   /// Builds the content for non duo devices.
   /// -> Smaller screens.
   Widget _makeNonDuoContent() {
-    return TextColumn(
-      text: removeAllHtmlTags(item.content.value),
+    return _makeTextColumn(
+        removeAllHtmlTags(item.content.value),
+    );
+  }
+
+  Widget _makeTextColumn(String text) {
+    return Text(
+      text,
+      textAlign: TextAlign.justify,
+      style: GoogleFonts.goudyBookletter1911(textStyle: body2Style),
     );
   }
 

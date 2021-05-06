@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multiple_screens/multiple_screens_methods.dart';
-import 'package:rss_book/ui/region/generic/home.dart';
-import 'package:rss_book/ui/region/generic/home_dualscreen.dart';
+import 'package:rss_book/ui/home.dart';
+import 'package:rss_book/ui/home_dualscreen.dart';
 
 void main() {
   runApp(App());

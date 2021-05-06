@@ -2,25 +2,21 @@ import 'package:dart_rss/dart_rss.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:multiple_screens/multiple_screens_methods.dart';
-import 'package:multiple_screens/multiple_screens_scaffold.dart';
 import 'package:rss_book/models/feed.dart';
 import 'package:rss_book/ui/styles/styles.dart';
 import 'package:rss_book/ui/transitions/slide_left_route.dart';
-import 'package:rss_book/utils/ui_utils.dart';
+import 'package:rss_book/ui/ui_utils.dart';
 import 'package:rss_book/utils/utils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../feed/feed_page.dart';
+import 'feed_page.dart';
 
-class HomeDualScreen extends StatefulWidget {
-  // - Overrides -
-
+class Home extends StatefulWidget {
   @override
-  _HomeDualScreenState createState() => _HomeDualScreenState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomeDualScreenState extends State<HomeDualScreen> {
+class _HomeState extends State<Home> {
   // - Private properties -
 
   /// Hardcoded list of feeds that will be fetched.
@@ -30,55 +26,37 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
     Feed("https://tscholze.uber.space/feed"),
   ];
 
-  /// Selected widget on the right side.
-  Widget _rightWidget = Center(
-    child: Text(
-      "Please select an article.",
-      style: titleStyle,
-    ),
-  );
-
   // - Overrides -
 
   @override
   Widget build(BuildContext context) {
-    return MultipleScreensScaffold(
-      appSpanned: true,
-      left: _makeLeftSide(),
-      right: _rightWidget,
+    return Scaffold(
+      body: FutureBuilder(
+        future:
+            Future.wait([_feeds[0].load(), _feeds[1].load(), _feeds[2].load()]),
+        builder: (context, snapshot) {
+          // 1. Handle errors.
+          if (snapshot.hasError) {
+            return _makeErrorText(snapshot.error);
+          }
+
+          // 2. Check if futures has been completed.
+          if (snapshot.connectionState == ConnectionState.done) {
+            return _makeBody();
+          }
+
+          // Otherwise, show loading indicator.
+          return _makeProgressIndicator();
+        },
+      ),
     );
   }
 
   // - Helper -
 
-  /// Makes the left side widget tree.
-  Widget _makeLeftSide() {
-    return FutureBuilder(
-      future:
-          Future.wait([_feeds[0].load(), _feeds[1].load(), _feeds[2].load()]),
-      builder: (context, snapshot) {
-        // 1. Handle errors.
-        if (snapshot.hasError) {
-          return _makeErrorText(snapshot.error);
-        }
-
-        // 2. Check if futures has been completed.
-        if (snapshot.connectionState == ConnectionState.done) {
-          return _makeBody();
-        }
-
-        // Otherwise, show loading indicator.
-        return _makeProgressIndicator();
-      },
-    );
-  }
-
   Widget _makeErrorText(Error error) {
     return Center(
-      child: Text(
-        error.toString(),
-        style: body1Style,
-      ),
+      child: Text(error.toString()),
     );
   }
 
@@ -169,7 +147,6 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
                         Icon(
                           FontAwesomeIcons.microsoft,
                           size: 12,
-                          color: Colors.black87,
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
@@ -207,7 +184,6 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
                         Icon(
                           FontAwesomeIcons.github,
                           size: 12,
-                          color: Colors.black87,
                         ),
                       ],
                     ),
@@ -264,7 +240,7 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width / 2 - 100,
+          width: MediaQuery.of(context).size.width - 80,
           child: Text(
             "${feed.data.title} - ${feed.data.description}",
             overflow: TextOverflow.clip,
@@ -297,9 +273,12 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
   Widget _makeArticleListItem(RssItem item) {
     return InkWell(
       onTap: () {
-        setState(() {
-          _rightWidget = FeedPage(item: item);
-        });
+        Navigator.push(
+          context,
+          SlideLeftRoute(
+            page: FeedPage(item: item),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(12, 4, 0, 4),
@@ -309,7 +288,7 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
             // Title
             ConstrainedBox(
               constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width / 2 * 0.75,
+                maxWidth: MediaQuery.of(context).size.width * 0.75,
               ),
               child: Text(
                 "${item.title}",
@@ -332,5 +311,10 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
         ),
       ),
     );
+  }
+
+  void _showToast(BuildContext context) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Center(child: Text("TEST"))));
   }
 }
