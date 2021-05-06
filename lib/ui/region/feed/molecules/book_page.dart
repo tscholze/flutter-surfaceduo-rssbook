@@ -16,10 +16,11 @@ class BookPage extends StatelessWidget {
 
   final RssItem item;
   final bool isDuo;
+  final bool isSpanned;
 
   // - Init -
 
-  const BookPage({this.item, this.isDuo}) : super();
+  const BookPage({this.item, this.isDuo, this.isSpanned}) : super();
 
   // - Overriders -
 
@@ -56,8 +57,12 @@ class BookPage extends StatelessWidget {
     return Column(
       children: [
         // Title
-        Text(item.title,
-            textAlign: TextAlign.left, maxLines: 2, style: titleStyle),
+        Text(
+            item.title,
+            textAlign: TextAlign.left,
+            maxLines: 2,
+            style: titleStyle,
+        ),
 
         // Spacer
         SizedBox(
@@ -73,7 +78,7 @@ class BookPage extends StatelessWidget {
       children: [
         // Left column
         SizedBox(
-          width: MediaQuery.of(context).size.width / 4 - 50,
+          width: MediaQuery.of(context).size.width / _getDivider() - 50,
           child: TextColumn(
             text: removeAllHtmlTags(item.content.value),
           ),
@@ -86,7 +91,7 @@ class BookPage extends StatelessWidget {
 
         // Right column
         SizedBox(
-          width: MediaQuery.of(context).size.width / 4 - 50,
+          width: MediaQuery.of(context).size.width / _getDivider() - 50,
           child: TextColumn(
             text: removeAllHtmlTags(item.content.value),
           ),
@@ -147,5 +152,9 @@ class BookPage extends StatelessWidget {
         )
       ],
     );
+  }
+
+  int _getDivider() {
+    return isSpanned ? 4 : 2;
   }
 }

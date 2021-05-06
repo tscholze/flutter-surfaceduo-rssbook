@@ -29,8 +29,8 @@ class _FeedPageState extends State<FeedPage> {
   /// Determines if the app runs on a Duo.
   bool _isDuo = false;
 
-  /// Gets the actual hinge size.
-  double _hingeSize = 0.0;
+  /// Determines if the app is spanned.
+  bool _isSpanned = false;
 
   // - Life cycle -
 
@@ -53,6 +53,7 @@ class _FeedPageState extends State<FeedPage> {
             child: BookPage(
               item: widget.item,
               isDuo: _isDuo,
+              isSpanned: _isSpanned,
             ),
           ),
         ),
@@ -66,8 +67,10 @@ class _FeedPageState extends State<FeedPage> {
   void _checkForDuo() async {
     try {
       var tmpIsDuo = await MultipleScreensMethods.isMultipleScreensDevice;
+      var tmpIsSpanned = await MultipleScreensMethods.isAppSpanned;
       setState(() {
         _isDuo = tmpIsDuo;
+        _isSpanned = tmpIsSpanned;
       });
     } catch (_) {
       setState(() {
