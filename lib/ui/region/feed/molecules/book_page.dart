@@ -7,10 +7,6 @@ import 'package:rss_book/ui/styles/styles.dart';
 import 'package:rss_book/utils/utils.dart';
 
 class BookPage extends StatelessWidget {
-  // - Static properties -
-
-  static const maxLinesOnlyText = 27;
-  static const maxLinesWithTitle = 25;
 
   // - Final fields -
 
@@ -40,9 +36,6 @@ class BookPage extends StatelessWidget {
             isDuo ? _makeDuoContent(context) : _makeNonDuoContent()
           ],
         ),
-
-        // Footer / Bottom
-        _makeBottom(context),
       ],
     );
   }
@@ -73,14 +66,25 @@ class BookPage extends StatelessWidget {
     );
   }
 
+  /// Builds the content for Duo devices.
+  /// -> Large screens.
   Widget _makeDuoContent(BuildContext context) {
+
+    var segments = _getContentSegments();
+
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Left column
         SizedBox(
           width: MediaQuery.of(context).size.width / _getDivider() - 50,
-          child: TextColumn(
-            text: removeAllHtmlTags(item.content.value),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              TextColumn(
+                text: segments[0],
+              ),
+            ],
           ),
         ),
 
@@ -93,67 +97,32 @@ class BookPage extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width / _getDivider() - 50,
           child: TextColumn(
-            text: removeAllHtmlTags(item.content.value),
+            text: segments[1],
           ),
         )
       ],
     );
   }
 
+  /// Builds the content for non duo devices.
+  /// -> Smaller screens.
   Widget _makeNonDuoContent() {
     return TextColumn(
       text: removeAllHtmlTags(item.content.value),
     );
   }
 
-  Widget _makeBottom(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Top dotted border
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-          child: DottedLine(
-            dashLength: 1,
-            dashGapLength: 3,
-            lineThickness: 1,
-            dashColor: Colors.blueGrey,
-          ),
-        ),
+  List<String> _getContentSegments() {
+    var list = removeAllHtmlTags(item.content.value).split(" ");
+    int halfIndex = (list.length / 2).floor();
 
-        // Bottom  back button
-        Row(
-          children: [
-            // Left button.
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                "< Tap to go back",
-                style: body1Style,
-              ),
-            ),
-
-            // Spacer.
-            Spacer(),
-
-            // Right button.
-            InkWell(
-              onTap: () {
-                launchURL(item.link);
-              },
-              child: Text(
-                "Open post in browser",
-                style: body1Style,
-              ),
-            ),
-          ],
-        )
-      ],
-    );
+    return [
+      list.getRange(0, halfIndex).join(" "),
+      list.getRange(halfIndex + 1, list.length).join(" ")
+    ];
   }
 
+  /// Gets the divider used for width calculations.
   int _getDivider() {
     return isSpanned ? 4 : 2;
   }

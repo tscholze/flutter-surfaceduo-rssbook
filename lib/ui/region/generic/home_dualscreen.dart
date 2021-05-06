@@ -25,8 +25,8 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
 
   /// Hardcoded list of feeds that will be fetched.
   List<Feed> _feeds = [
+    Feed("https://thesurfaceguide.com/feed/"),
     Feed("https://www.drwindows.de/news/feed"),
-    Feed("https://www.apfeltalk.de/magazin/feed/"),
     Feed("https://tscholze.uber.space/feed"),
   ];
 
@@ -169,6 +169,7 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
                         Icon(
                           FontAwesomeIcons.microsoft,
                           size: 12,
+                          color: Colors.black87,
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
@@ -206,6 +207,7 @@ class _HomeDualScreenState extends State<HomeDualScreen> {
                         Icon(
                           FontAwesomeIcons.github,
                           size: 12,
+                          color: Colors.black87,
                         ),
                       ],
                     ),
