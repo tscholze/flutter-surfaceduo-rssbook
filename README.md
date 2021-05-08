@@ -25,13 +25,25 @@
 7. [x] Make app able to run on single screen devices
 9. [x] Make app able to run on dual screen devices
 10. [ ] Check on how to embedd localization
-11. [ ] Clean up some Flutter beingger's mess
-12. [ ] Check on publishing to the Play Store
+11. [ ] Clean up some Flutter beginners's mess
+12. [ ] Update app to use upcoming Flutter dual screen support
+13. [ ] Check on publishing to the Play Store
 
 ## Abandoned ideas
 * Make the app look like an ebook reader with page curl effect
 * Support more than one dual screen orientation or gesture
 * Make rss post content always good looking and well formatted
+
+## What it is
+* Pet project
+* Show of the joy of modern software development
+* Playground for new phone form factors
+* Playground for Flutter and DArt
+
+## What it isn't
+* Production ready app
+* Well coded
+* Ment to be more than a sample
 
 ## Caution
 
