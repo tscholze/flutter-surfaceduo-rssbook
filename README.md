@@ -38,7 +38,7 @@
 * Pet project
 * Show of the joy of modern software development
 * Playground for new phone form factors
-* Playground for Flutter and DArt
+* Playground for Flutter and Dart
 
 ## What it isn't
 * Production ready app
