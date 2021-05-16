@@ -1,12 +1,9 @@
 import 'package:dart_rss/dart_rss.dart';
-import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:multiple_screens/multiple_screens_methods.dart';
 import 'package:multiple_screens/multiple_screens_scaffold.dart';
 import 'package:rss_book/models/feed.dart';
 import 'package:rss_book/ui/styles/styles.dart';
-import 'package:rss_book/ui/transitions/slide_left_route.dart';
 import 'package:rss_book/ui/ui_utils.dart';
 import 'package:rss_book/utils/utils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -1,5 +1,4 @@
 import 'package:dart_rss/dart_rss.dart';
-import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rss_book/models/feed.dart';
@@ -311,10 +310,5 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
-  }
-
-  void _showToast(BuildContext context) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Center(child: Text("TEST"))));
   }
 }
