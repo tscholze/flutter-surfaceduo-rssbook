@@ -8,6 +8,9 @@
 |-------|------|
 |GitHub|[![Dart](https://github.com/tscholze/flutter-surfaceduo-rssbook/actions/workflows/build_app.yml/badge.svg)](https://github.com/tscholze/flutter-surfaceduo-rssbook/actions/workflows/build_app.yml)
 
+## Publications
+- Dr. Windows:  ["Wir basteln uns mit Googles Flutter einen etwas anderen RSS Reader für das Surface Duo"](https://www.drwindows.de/news/wir-basteln-uns-mit-googles-flutter-einen-etwas-anderen-rss-reader-fuer-das-surface-duo)
+
 ## Prerequisites
 
 * Android Studio
